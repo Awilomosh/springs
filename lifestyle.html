@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lifestyle | Visuals by Springs</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subheading {
+            font-size: 1.1rem;
+            color: #999;
+            margin-bottom: 40px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        .big-button {
+            display: inline-block;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .big-button:hover {
+            background-color: #c7a65f;
+        }
+
+        /* Fullscreen viewer */
+        .fullscreen-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .fullscreen-img {
+            max-height: 90vh;
+            max-width: 90vw;
+            border-radius: 10px;
+        }
+
+        .close-btn,
+        .nav-arrow {
+            position: absolute;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .close-btn:hover,
+        .nav-arrow:hover {
+            color: #c7a65f;
+            transform: scale(1.2);
+        }
+
+        .close-btn {
+            top: 20px;
+            right: 30px;
+            font-size: 36px;
+        }
+
+        .nav-arrow {
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            padding: 10px;
+            user-select: none;
+        }
+
+        .left-arrow {
+            left: 20px;
+        }
+
+        .right-arrow {
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lifestyle Photography</h1>
+        <p class="subheading">Browse through our collection of lifestyle photography</p>
+
+        <div class="photo-grid" id="photoGrid">
+            <!-- Images will be added here -->
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0039.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0042.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0043.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/_SPR5333.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/_SPR5408.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/_SPR5424.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/_SPR5432.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/_SPR5448.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0063.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0064.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0065.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0066.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0067.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0068.jpg" alt="" /></div>
+            <div class="photo-item"><img src="imgs/life/IMG-20250414-WA0069.jpg" alt="" /></div>
+        </div>
+
+        <a href="index.html" class="big-button">Back to Home</a>
+    </div>
+
+    <!-- Fullscreen viewer -->
+    <div class="fullscreen-viewer" id="fullscreenViewer">
+        <span class="close-btn" onclick="closeFullscreen()">&times;</span>
+        <span class="nav-arrow left-arrow" onclick="changeImage(-1)">&#10094;</span>
+        <img id="fullscreenImg" class="fullscreen-img" src="" alt="" />
+        <span class="nav-arrow right-arrow" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.photo-grid img');
+        const viewer = document.getElementById('fullscreenViewer');
+        const fullscreenImg = document.getElementById('fullscreenImg');
+        let currentIndex = 0;
+
+        images.forEach((img, i) => {
+            img.addEventListener('click', () => {
+                currentIndex = i;
+                showImage(currentIndex);
+                viewer.style.display = 'flex';
+            });
+        });
+
+        function showImage(index) {
+            fullscreenImg.src = images[index].src;
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex >= images.length) currentIndex = 0;
+            showImage(currentIndex);
+        }
+
+        function closeFullscreen() {
+            viewer.style.display = 'none';
+        }
+
+        // Optional: keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (viewer.style.display === 'flex') {
+                if (e.key === 'ArrowRight') changeImage(1);
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'Escape') closeFullscreen();
+            }
+        });
+    </script>
+</body>
+
+</html>

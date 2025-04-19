@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="commercial.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corporate | Visuals by Springs</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>Commercial Photography</h1>
+    <p class="subheading">Browse through our collection of commercial photography</p>
+
+    <div class="photo-grid" id="grid">
+        <img src="imgs/com/_SPR0042.jpg" alt="Corporate Image 1" />
+        <img src="imgs/com/_SPR0177.jpg" alt="Corporate Image 2" />
+        <img src="imgs/com/_SPR4293.jpg" alt="Corporate Image 3" />
+        <img src="imgs/com/_SPR0204.jpg" alt="Corporate Image 4" />
+        <img src="imgs/com/_SPR0383.jpg" alt="Corporate Image 5" />
+        <img src="imgs/com/_SPR0587.jpg" alt="Corporate Image 6" />
+        <img src="imgs/com/_SPR3949.jpg" alt="Corporate Image 7" />
+        <img src="imgs/com/_SPR3845.jpg" alt="Corporate Image 8" />
+        <img src="imgs/com/IMG-20250414-WA0038.jpg" alt="Corporate Image 9" />
+        <img src="imgs/com/_SPR1078.jpg" alt="Corporate Image 10" />
+        <img src="imgs/com/_SPR1252.jpg" alt="Corporate Image 11" />
+        <img src="imgs/com/_SPR3037.jpg" alt="Corporate Image 12" />
+        <img src="imgs/com/_SPR1590.jpg" alt="Corporate Image 13" />
+        <img src="imgs/com/_SPR1693.jpg" alt="Corporate Image 14" />
+        <img src="imgs/com/_SPR4494.jpg" alt="Corporate Image 15" />
+    </div>
+
+    <a href="index.html" class="big-button">Back to Home</a>
+
+    <div id="fullscreenView" class="fullscreen" style="display: none;">
+        <button class="close-btn" onclick="hideFullscreen()">✕</button>
+        <div class="controls">
+            <button class="arrow" onclick="prevImage()">&#10094;</button>
+            <button class="arrow" onclick="nextImage()">&#10095;</button>
+        </div>
+        <img id="fullscreenImage" src="" alt="Fullscreen Image" />
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.photo-grid img');
+        const fullscreenView = document.getElementById('fullscreenView');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        let currentIndex = -1;
+
+        const showImage = (index) => {
+            fullscreenImage.src = images[index].src;
+            fullscreenView.style.display = 'flex';
+            currentIndex = index;
+        };
+
+        const hideFullscreen = () => {
+            fullscreenView.style.display = 'none';
+            fullscreenImage.src = '';
+            currentIndex = -1;
+        };
+
+        const prevImage = () => {
+            if (currentIndex > -1) {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
+        };
+
+        const nextImage = () => {
+            if (currentIndex > -1) {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+        };
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => showImage(index));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (fullscreenView.style.display === 'flex') {
+                if (e.key === 'Escape') hideFullscreen();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            }
+        });
+
+        let startX = 0;
+        fullscreenView.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        fullscreenView.addEventListener('touchend', (e) => {
+            if (startX === 0) return;
+            const endX = e.changedTouches[0].clientX;
+            const diff = endX - startX;
+
+            if (diff > 50) {
+                prevImage();
+            } else if (diff < -50) {
+                nextImage();
+            }
+            startX = 0;
+        });
+    </script>
+</body>
+
+</html>

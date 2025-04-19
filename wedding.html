@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding | Visuals by Springs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            flex-grow: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .subheading {
+            font-size: 1.1rem;
+            color: #999;
+            margin-bottom: 40px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .big-button {
+            display: inline-block;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .big-button:hover {
+            background-color: #c7a65f;
+        }
+
+        /* Fullscreen Modal Styles */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .fullscreen-modal img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .fullscreen-modal button {
+            position: absolute;
+            font-size: 35px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .close-btn {
+            top: 20px;
+            right: 20px;
+        }
+
+        .next-btn {
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+        }
+
+        .prev-btn {
+            top: 50%;
+            left: 30px;
+            transform: translateY(-50%);
+        }
+
+        .fullscreen-modal button:hover {
+            color: #c7a65f;
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Wedding Photography</h1>
+        <p class="subheading">Browse through our collection of wedding photography</p>
+
+        <div class="photo-grid" id="photoGrid">
+            <!-- Images will open fullscreen on click -->
+            <img src="imgs/wed/IMG-20250414-WA0036.jpg" alt="Wedding Image 1" onclick="openFullscreen(0)" />
+            <img src="imgs/wed/IMG-20250414-WA0037.jpg" alt="Wedding Image 2" onclick="openFullscreen(1)" />
+            <img src="imgs/wed/IMG-20250414-WA0040.jpg" alt="Wedding Image 3" onclick="openFullscreen(2)" />
+            <img src="imgs/wed/IMG-20250414-WA0041.jpg" alt="Wedding Image 4" onclick="openFullscreen(3)" />
+            <img src="imgs/wed/IMG-20250414-WA0051.jpg" alt="Wedding Image 5" onclick="openFullscreen(4)" />
+            <img src="imgs/wed/IMG-20250414-WA0052.jpg" alt="Wedding Image 6" onclick="openFullscreen(5)" />
+            <img src="imgs/wed/IMG-20250414-WA0046.jpg" alt="Wedding Image 7" onclick="openFullscreen(6)" />
+            <img src="imgs/wed/IMG-20250414-WA0047.jpg" alt="Wedding Image 8" onclick="openFullscreen(7)" />
+            <img src="imgs/wed/IMG-20250414-WA0053.jpg" alt="Wedding Image 9" onclick="openFullscreen(8)" />
+            <img src="imgs/wed/IMG-20250414-WA0054.jpg" alt="Wedding Image 10" onclick="openFullscreen(9)" />
+            <img src="imgs/wed/IMG-20250414-WA0057.jpg" alt="Wedding Image 11" onclick="openFullscreen(10)" />
+            <img src="imgs/wed/IMG-20250414-WA0058.jpg" alt="Wedding Image 12" onclick="openFullscreen(11)" />
+            <img src="imgs/wed/IMG-20250414-WA0059.jpg" alt="Wedding Image 13" onclick="openFullscreen(12)" />
+            <img src="imgs/wed/IMG-20250414-WA0060.jpg" alt="Wedding Image 14" onclick="openFullscreen(13)" />
+            <img src="imgs/wed/IMG-20250414-WA0079.jpg" alt="Wedding Image 15" onclick="openFullscreen(14)" />
+        </div>
+
+        <a href="index.html" class="big-button">Back to Home</a>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <button class="close-btn" onclick="closeFullscreen()">×</button>
+        <button class="prev-btn" onclick="prevImage()">&#10094;</button>
+        <img id="fullscreenImage" src="" alt="Fullscreen Image" />
+        <button class="next-btn" onclick="nextImage()">&#10095;</button>
+    </div>
+
+    <script>
+        const images = Array.from(document.querySelectorAll('.photo-grid img'));
+        const modal = document.getElementById('fullscreenModal');
+        const fullscreenImg = document.getElementById('fullscreenImage');
+        let currentIndex = 0;
+
+        function openFullscreen(index) {
+            currentIndex = index;
+            fullscreenImg.src = images[index].src;
+            modal.style.display = 'flex';
+        }
+
+        function closeFullscreen() {
+            modal.style.display = 'none';
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            fullscreenImg.src = images[currentIndex].src;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            fullscreenImg.src = images[currentIndex].src;
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'Escape') closeFullscreen();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            }
+        });
+    </script>
+</body>
+
+</html>

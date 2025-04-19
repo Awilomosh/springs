@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corporate | Visuals by Springs</title>
+    <style>
+        :root {
+            --gold: #c7a65f;
+            --dark-bg: #0f0f0f;
+            --text-color: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .subheading {
+            font-size: 1.1rem;
+            color: #999;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .big-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 20px;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .big-button:hover {
+            background-color: var(--gold);
+            color: #000;
+        }
+
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .fullscreen img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .fullscreen img:hover {
+            transform: scale(1.02);
+        }
+
+        .controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            pointer-events: none;
+        }
+
+        .arrow {
+            font-size: 3rem;
+            color: var(--text-color);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .arrow:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2rem;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--gold);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .arrow {
+                font-size: 2.5rem;
+            }
+
+            .close-btn {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Corporate Photography</h1>
+    <p class="subheading">Browse through our collection of corporate photography</p>
+
+    <div class="photo-grid" id="grid">
+        <img src="imgs/cop/_SPR7668.jpg" alt="Corporate Image 1" />
+        <img src="imgs/cop/_SPR7686.jpg" alt="Corporate Image 2" />
+        <img src="imgs/cop/_SPR7728.jpg" alt="Corporate Image 3" />
+        <img src="imgs/cop/_SPR7734.jpg" alt="Corporate Image 4" />
+        <img src="imgs/cop/_SPR7740.jpg" alt="Corporate Image 5" />
+        <img src="imgs/cop/_SPR7743.jpg" alt="Corporate Image 6" />
+        <img src="imgs/cop/_SPR7748.jpg" alt="Corporate Image 7" />
+        <img src="imgs/cop/_SPR7798.jpg" alt="Corporate Image 8" />
+        <img src="imgs/cop/_SPR7805.jpg" alt="Corporate Image 9" />
+        <img src="imgs/cop/_SPR7864.jpg" alt="Corporate Image 10" />
+        <img src="imgs/cop/_SPR7867.jpg" alt="Corporate Image 11" />
+        <img src="imgs/cop/_SPR7877.jpg" alt="Corporate Image 12" />
+        <img src="imgs/cop/_SPR7887.jpg" alt="Corporate Image 13" />
+        <img src="imgs/cop/_SPR7907.jpg" alt="Corporate Image 14" />
+        <img src="imgs/cop/_SPR7980.jpg" alt="Corporate Image 15" />
+    </div>
+
+    <a href="index.html" class="big-button">Back to Home</a>
+
+    <div id="fullscreenView" class="fullscreen" style="display: none;">
+        <button class="close-btn" onclick="hideFullscreen()">✕</button>
+        <div class="controls">
+            <button class="arrow" onclick="prevImage()">&#10094;</button>
+            <button class="arrow" onclick="nextImage()">&#10095;</button>
+        </div>
+        <img id="fullscreenImage" src="" alt="Fullscreen Image" />
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.photo-grid img');
+        const fullscreenView = document.getElementById('fullscreenView');
+        const fullscreenImage = document.getElementById('fullscreenImage');
+        let currentIndex = -1;
+
+        const showImage = (index) => {
+            fullscreenImage.src = images[index].src;
+            fullscreenView.style.display = 'flex';
+            currentIndex = index;
+        };
+
+        const hideFullscreen = () => {
+            fullscreenView.style.display = 'none';
+            fullscreenImage.src = '';
+            currentIndex = -1;
+        };
+
+        const prevImage = () => {
+            if (currentIndex > -1) {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
+        };
+
+        const nextImage = () => {
+            if (currentIndex > -1) {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            }
+        };
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => showImage(index));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (fullscreenView.style.display === 'flex') {
+                if (e.key === 'Escape') hideFullscreen();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            }
+        });
+
+        let startX = 0;
+        fullscreenView.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        fullscreenView.addEventListener('touchend', (e) => {
+            if (startX === 0) return;
+            const endX = e.changedTouches[0].clientX;
+            const diff = endX - startX;
+
+            if (diff > 50) {
+                prevImage();
+            } else if (diff < -50) {
+                nextImage();
+            }
+            startX = 0;
+        });
+    </script>
+</body>
+
+</html>
