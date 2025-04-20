@@ -1,3 +1,7 @@
 {
-    "installCommand": "git lfs install && git lfs pull"
+    "build": {
+        "env": {
+            "GIT_LFS_ENABLED": "1"
+        }
+    }
 }
